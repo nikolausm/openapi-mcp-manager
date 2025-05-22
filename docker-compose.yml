@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Web Server für Management Interface
+  web-server:
+    build: .
+    container_name: openapi-mcp-web
+    command: ["/app/start.sh", "web"]
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+      - ./public:/app/public
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - SPECS_DIR=/app/data/specs
+    restart: unless-stopped
+    networks:
+      - openapi-mcp-network
+
+  # MCP Server für Claude Integration
+  mcp-server:
+    build: .
+    container_name: openapi-mcp-server
+    command: ["/app/start.sh", "mcp"]
+    volumes:
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      - SPECS_DIR=/app/data/specs
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - openapi-mcp-network
+
+networks:
+  openapi-mcp-network:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local

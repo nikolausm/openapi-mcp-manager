@@ -1,0 +1,39 @@
+{
+  "name": "openapi-mcp-manager",
+  "version": "1.0.0",
+  "description": "MCP Server mit Web-Interface für OpenAPI Spezifikationen",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "web": "ts-node src/web-server.ts",
+    "mcp": "ts-node src/mcp-server.ts",
+    "docker:build": "docker build -t openapi-mcp-manager .",
+    "docker:run": "docker run --rm -it -p 3001:3001 -v $(pwd)/data:/app/data openapi-mcp-manager",
+    "docker:compose": "docker-compose up -d"
+  },
+  "keywords": [
+    "mcp",
+    "openapi",
+    "claude",
+    "api",
+    "tools"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "axios": "^1.6.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0",
+    "nodemon": "^3.0.0"
+  }
+}
