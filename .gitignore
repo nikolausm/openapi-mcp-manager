@@ -1,6 +1,7 @@
 node_modules/
 dist/
 data/specs/*.json
+!data/specs/*.example.json
 *.log
 .env
 .DS_Store

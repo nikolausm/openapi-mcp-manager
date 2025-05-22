@@ -1,0 +1,157 @@
+{
+  "id": "pdf-mgmt-demo",
+  "name": "PDF Management Demo API",
+  "baseUrl": "http://localhost:1339",
+  "spec": {
+    "openapi": "3.0.1",
+    "info": {
+      "title": "PdfManagement.Web | v1",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:1339/"
+      }
+    ],
+    "paths": {
+      "/PdfFiles": {
+        "get": {
+          "operationId": "list_pdf_files",
+          "summary": "Liste alle PDF Dateien",
+          "tags": ["PdfFiles"],
+          "parameters": [
+            {
+              "name": "query",
+              "in": "query",
+              "schema": {
+                "type": "string",
+                "default": null
+              },
+              "description": "Suchtext für PDF Dateien"
+            },
+            {
+              "name": "skip",
+              "in": "query",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+              }
+            },
+            {
+              "name": "take",
+              "in": "query",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 100
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PdfFile"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/PdfFiles/{id}": {
+        "get": {
+          "operationId": "get_pdf_file",
+          "summary": "PDF Datei Details abrufen",
+          "tags": ["PdfFiles"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PdfFile"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Operations/UploadFiles": {
+        "post": {
+          "operationId": "upload_files",
+          "summary": "Dateien hochladen",
+          "tags": ["Operations"],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "PdfFile": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "metaData": {
+              "type": "object",
+              "properties": {
+                "documentType": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "createdAt": "2024-12-19T00:00:00.000Z"
+}
