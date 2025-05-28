@@ -2,6 +2,7 @@
   "name": "openapi-mcp-manager",
   "version": "1.0.0",
   "description": "MCP Server mit Web-Interface für OpenAPI Spezifikationen",
+  "type": "module",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",

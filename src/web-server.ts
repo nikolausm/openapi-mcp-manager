@@ -1,7 +1,12 @@
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import cors from 'cors';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface OpenApiSpec {
   id: string;
@@ -90,7 +95,7 @@ class OpenApiWebServer {
   private setupMiddleware() {
     this.app.use(cors());
     this.app.use(express.json({ limit: '50mb' }));
-    this.app.use(express.static(path.join(__dirname, 'public')));
+    this.app.use(express.static(path.join(__dirname, '../public')));
     
     // Request logging
     this.app.use((req, res, next) => {

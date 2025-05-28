@@ -1,0 +1,13 @@
+# Alternative Claude Desktop Konfiguration mit Start-Script
+# Diese Konfiguration können Sie verwenden, falls die direkte node-Version Probleme macht
+
+{
+  "mcpServers": {
+    "openapi-manager": {
+      "command": "/Users/michaelnikolaus/openapi-mcp-manager-install/start-mcp.sh",
+      "env": {
+        "SPECS_DIR": "/Users/michaelnikolaus/openapi-mcp-manager-install/data/specs"
+      }
+    }
+  }
+}
